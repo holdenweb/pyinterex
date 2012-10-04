@@ -1,4 +1,4 @@
-OBJDIR := ppfiles
+OBJDIR := pp
 SRCDIR := src
 OBJS := $(addprefix $(OBJDIR)/,test1.pp execute.pp)
 
