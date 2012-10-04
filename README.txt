@@ -1,11 +1,11 @@
-This directory supports the first Pluralsight "Intrduction to Python" class
+This directory supports the first Pluralsight "Introduction to Python" class
 with Python scripts that, when pasted into an interactive session, will
 produce outputs suitable for running in playerpiano (the .pp files).
 
 These latter are used to present the interactive sessions. Since a facility
 with the keyboard is now no longer required, you should really have a copy
 of the .pp file in printed form to ensure that only appropriate amounts of
-"typing" are done. It sounds silly if the keyboard clatters after the end
+"typing" are done. It sounds odd if the keyboard clatters after the end
 of a line.
 
 Also, ideally there will be a way to hide the fact that playerpiano is in use,
@@ -17,3 +17,8 @@ The makefile is an attempt to automate the production of the playerpiano
 scripts and retain some sanity. The scripts end up in the ppfiles directory.
 They are named LNN-NNN.pp, where NN is the lesson number and NNN is an
 arbitrary number to induce an ordering in the files.
+
+There are also a number of test*.py files, all of which should ultimately
+verify the features of the program are still functional.
+
+Steve Holden                                              October 4, 2012

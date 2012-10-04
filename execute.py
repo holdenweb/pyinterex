@@ -7,12 +7,20 @@
 import code
 import sys
 
+SIloop = None # Used in pathological EOF
 exprs = (line[:-1] for line in open(sys.argv[1]))
 for e in exprs:
     print '>>> %s' % e
     cmd = code.compile_command(e)
     while cmd is None:
-        n = exprs.next()
+        try:
+            n = exprs.next()
+        except StopIteration:
+            if SIloop:
+                sys.exit("Last statement appears to be incomplete")
+            SIloop = True
+            print >> sys.stderr, "[Attempting terminal newline insertion]"
+            n = ""
         e += "\n" + n
         print '... %s' % n
         cmd = code.compile_command(e)
