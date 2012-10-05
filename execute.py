@@ -22,6 +22,12 @@ class Raw_Input:
         r = self.file.next()[:-1]
         print "%s%s" % (prompt, r)
         return r
+
+def fixed_input(prompt):
+    s = fixed_raw_input(prompt)
+    r = eval(s, namespace)
+    return r
+
 def tagged(p, l, o, c): # returns prompted command
     if l:
         return "%s %s%s%s" % (p, o, l, c)
@@ -43,7 +49,9 @@ else:
 filename = sys.argv[1]
 fileroot = os.path.splitext(filename)[0]
 fixed_raw_input = Raw_Input(fileroot)
-namespace = {"raw_input": fixed_raw_input}
+namespace = {
+    "raw_input": fixed_raw_input,
+    "input": fixed_input}
 SIloop = None # Used in pathological EOF
 exprs = (line[:-1] for line in open(filename))
 for e in exprs:
