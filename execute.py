@@ -20,7 +20,7 @@ class Raw_Input:
             self.new = False
             self.file = open(self.name+".in")
         r = self.file.next()[:-1]
-        print "%s%s" % (prompt, r)
+        print "%s%s%s%s" % (prompt, o, r, c)
         return r
 
 def fixed_input(prompt):
