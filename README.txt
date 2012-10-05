@@ -22,3 +22,22 @@ There are also a number of test*.py files, all of which should ultimately
 verify the features of the program are still functional.
 
 Steve Holden                                              October 4, 2012
+
+Occasionally it would be nice if a script could read standard input
+using raw_input() or input(). Even nicer would be if the substituted functions
+could be 'lazy,' so there was no need to provide input files for those tests
+where input was not required.
+
+First approach: raw_input() is an object created with the knowledge of the
+module name it is testing. It only opens the data file (whose name relates
+directly to that of the module) when its __call__ method is activated.
+
+The approach initially implemented brought out the interesting fact that
+the namespace needs to be maintained across all statements in the file.
+Considering that I hadn't considered the role of the global namespace at
+all in the early versions I am impressed how much of my code actually
+ran at all
+
+Steve Holden                                (still, just) October 4, 2012
+Shit, I don't have any unit tests. What should I do about that?
+
