@@ -12,15 +12,15 @@ for i in  1, 2, 3:
 def f(x):
     return x+x
 
-class AnyOld(object): # new-style class
+class ListCreator(object): # new-style class
     def __init__(self, ct):
         self.ct = ct
     def listof(self, val):
-        print range(self.ct)
         return [val for x in range(self.ct)]
 
-anyold = AnyOld(3)
-f(anyold.listof(None))
+creator = ListCreator(3)
+creator.listof(None)
+f(creator.listof(None))
 
 ("just "
 "checking")

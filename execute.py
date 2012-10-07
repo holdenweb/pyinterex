@@ -20,7 +20,7 @@ class Raw_Input:
             self.new = False
             self.file = open(self.name+".in")
         r = self.file.next()[:-1]
-        print "%s%s%s%s" % (prompt, o, r, c)
+        print tagged(prompt, r, o, c)
         return r
 
 def fixed_input(prompt):
@@ -68,7 +68,6 @@ for e in exprs:
             n = ""
         e += "\n" + n
         print tagged('...', n, o, c)
-        print "+++ namespace +++\n", namespace
         cmd = code.compile_command(e)
     r = eval(cmd, namespace)
     if r:
