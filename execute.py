@@ -47,13 +47,16 @@ else:
     o = c = ""
 
 filename = sys.argv[1]
+del sys.argv[1] # inherited by running code?
 fileroot = os.path.splitext(filename)[0]
 fixed_raw_input = Raw_Input(fileroot)
 namespace = {
+    "__name__": "__main__",
     "raw_input": fixed_raw_input,
     "input": fixed_input}
 SIloop = None # Used in pathological EOF
-exprs = (line[:-1] for line in open(filename))
+exprs = ((line[:-1] if line[-1]=="\n" else line)
+         for line in open(filename)) # Don't trim a non-newline!
 for e in exprs:
     print tagged('>>>', e, o, c)
     cmd = code.compile_command(e)
@@ -62,13 +65,13 @@ for e in exprs:
             n = exprs.next()
         except StopIteration:
             if SIloop:
-                sys.exit("Last statement appears to be incomplete")
+                sys.exit("%Last statement appears to be incomplete%")
             SIloop = True
             print >> sys.stderr, "[Attempting terminal newline insertion]"
             n = ""
         e += "\n" + n
         print tagged('...', n, o, c)
-        cmd = code.compile_command(e)
+        cmd = code.compile_command(e, filename=filename, symbol='single')
     r = eval(cmd, namespace)
     if r:
         print repr(r)
